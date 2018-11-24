@@ -1,0 +1,15 @@
+@media all and (min-width: 480px) {
+    .Login {
+      padding: 60px 0;
+    }
+  
+    .Login form {
+      margin: 0 auto;
+      max-width: 320px;
+      color: yellow
+    }
+
+    body {
+        background-color: rgba(30, 32, 46, 0.952)
+    }
+  }
