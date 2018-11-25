@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Table, Navbar } from "react-bootstrap";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
 import { load, clear } from './Actions';
 
 const mapDispatchToProps = dispatch => {
@@ -36,8 +35,6 @@ class Student extends Component {
         this.props.history.push('/login');
         this.props.clear();
     }
-
-
 
     render() {
         return (

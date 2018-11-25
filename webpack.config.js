@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const API_URL = JSON.stringify('http://localhost/api')
+const API_URL = JSON.stringify('http://localhost:8090/')
 
 const { resolve } = require('path');
 

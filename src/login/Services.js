@@ -7,8 +7,6 @@ export const getToken = (login, password) => {
             password
         })
             .then((response) => resolve(response.data))
-            .catch((error) => {
-                reject(error)
-            })
+            .catch((error) => reject(error))
     })
 }

@@ -3,6 +3,7 @@ import { Button, FormGroup, FormControl, ControlLabel, Image } from "react-boots
 import "./Style.css";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import NotificationSystem from 'react-notification-system';
 
 import { authUser, clear } from './Actions';
 
@@ -26,10 +27,14 @@ class Login extends Component {
         this.validateForm = this.validateForm.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.showUnauthorizedError = this.showUnauthorizedError.bind(this);
+
+        this.notificationDOMRef = React.createRef();
     }
 
     componentDidMount() {
         this.props.clear();
+        this._notificationSystem = this.refs.notificationSystem;
     }
 
     validateForm() {
@@ -48,8 +53,19 @@ class Login extends Component {
             .then(() => {
                 this.props.history.push('/alunos')
             })
-            .catch(err => { });
+            .catch(err => this.showUnauthorizedError());
         event.preventDefault();
+    }
+
+
+
+
+    showUnauthorizedError() {
+        this._notificationSystem.addNotification({
+            message: 'Usuário e/ou senha(s) inválido(s)!',
+            level: 'error',
+            position: 'bc'
+        });
     }
 
     render() {
@@ -83,6 +99,7 @@ class Login extends Component {
                         Login
           </Button>
                 </form>
+                <NotificationSystem ref="notificationSystem" />
             </div>
         );
     }

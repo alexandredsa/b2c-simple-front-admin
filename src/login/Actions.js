@@ -11,9 +11,7 @@ export const authUser = (username, password) => {
             getToken(username, password).then(response => {
                 dispatch(setAuthToStore(response))
                 resolve(response)
-            }).catch(error => {
-                reject(error)
-            })
+            }).catch(error => reject(error))
         })
     }
 }
