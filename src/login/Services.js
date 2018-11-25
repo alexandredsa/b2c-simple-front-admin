@@ -1,9 +1,8 @@
-
 import axios from 'axios';
 
 export const getToken = (login, password) => {
     return new Promise((resolve, reject) => {
-        axios.post("http://localhost:8090" + '/auth', {
+        axios.post(API_URL + '/auth', {
             login,
             password
         })

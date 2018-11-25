@@ -1,4 +1,3 @@
-// Import Actions
 import {
     LOAD, CLEAR
 } from './Actions'

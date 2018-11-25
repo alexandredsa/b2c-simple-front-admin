@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 
 export const getStudents = (token) => {
@@ -9,7 +8,7 @@ export const getStudents = (token) => {
             }
         };
 
-        axios.get("http://localhost:8090" + '/students', config)
+        axios.get(API_URL + '/students', config)
             .then((response) => resolve(response.data))
             .catch((error) => {
                 reject(error)

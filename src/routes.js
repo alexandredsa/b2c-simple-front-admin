@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Redirect, History } from 'react-router-dom';
-import { ConnectedRouter, routerMiddleware, push } from 'react-router-redux'
-import { connect, Provider } from 'react-redux'
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory';
 import PrivateRouteContainer from './components/PrivateRouteContainer';
 
@@ -15,7 +14,7 @@ const history = createHistory({ basename: '/admin' })
 
 class Routes extends Component {
 
-    renderRoutes = () => {
+    renderRoutes() {
         return <ConnectedRouter history={history}>
             <Switch>
                 <Route exact path="/" render={() => (

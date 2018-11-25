@@ -2,19 +2,6 @@ import React, { Component } from 'react';
 import { Redirect, Route, withRouter } from 'react-router-dom';
 import { connect, Provider } from 'react-redux'
 
-// Actions
-
-
-
-const style = {
-    container: {
-        position: 'relative',
-    },
-    refresh: {
-        display: 'inline-block',
-        position: 'relative',
-    },
-};
 
 const mapDispatchToProps = dispatch => {
     return {

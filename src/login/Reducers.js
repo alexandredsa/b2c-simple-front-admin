@@ -1,4 +1,3 @@
-// Import Actions
 import {
     SET_AUTH_TO_STORE, CLEAR
 } from './Actions'

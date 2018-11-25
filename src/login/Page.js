@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, ControlLabel, Image, Col } from "react-bootstrap";
+import { Button, FormGroup, FormControl, ControlLabel, Image } from "react-bootstrap";
 import "./Style.css";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -22,6 +22,10 @@ class Login extends Component {
             login: "",
             password: ""
         };
+
+        this.validateForm = this.validateForm.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -32,13 +36,13 @@ class Login extends Component {
         return this.state.login.length > 0 && this.state.password.length > 0;
     }
 
-    handleChange = event => {
+    handleChange(event) {
         this.setState({
             [event.target.id]: event.target.value
         });
     }
 
-    handleSubmit = event => {
+    handleSubmit(event) {
         const { login, password } = this.state;
         this.props.authUser(login, password)
             .then(() => {
