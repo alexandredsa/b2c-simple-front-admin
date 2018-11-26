@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const API_URL = JSON.stringify('http://100.26.78.111/api')
+const API_URL = JSON.stringify('https://www.b2c-app.info/api')
 
 const { resolve } = require('path');
 
