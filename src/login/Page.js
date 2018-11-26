@@ -53,16 +53,24 @@ class Login extends Component {
             .then(() => {
                 this.props.history.push('/alunos')
             })
-            .catch(err => this.showUnauthorizedError());
+            .catch(err => this.showUnauthorizedError(err));
         event.preventDefault();
     }
 
 
 
 
-    showUnauthorizedError() {
+    showUnauthorizedError(err) {
+        let message = "Servidor Temporariamente Indisponível";
+
+        if(err.response.status === 401) {
+            message = 'Usuário e/ou senha(s) inválido(s)!';
+        } else if (err.response.status === 403) {
+            message = 'Esse usuário foi inativado.\nEntre em contato com o administrador do sistema.';
+        }
+
         this._notificationSystem.addNotification({
-            message: 'Usuário e/ou senha(s) inválido(s)!',
+            message,
             level: 'error',
             position: 'bc'
         });
