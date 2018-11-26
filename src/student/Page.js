@@ -36,6 +36,11 @@ class Student extends Component {
         this.props.clear();
     }
 
+
+    goToUsers() {
+        this.props.history.push('/usuarios');
+    }
+
     render() {
         return (
             <div>
@@ -49,6 +54,9 @@ class Student extends Component {
                     <Navbar.Collapse>
                         <Navbar.Text>
                             Logado como: <Navbar.Link href="#">{this.props.username}</Navbar.Link>
+                        </Navbar.Text>
+                        <Navbar.Text>
+                            <Navbar.Link href="#" onClick={() => this.goToUsers()}>Usuários</Navbar.Link>
                         </Navbar.Text>
                         <Navbar.Text pullRight>
                             <Navbar.Link href="#" onClick={() => this.logout()}>Sair</Navbar.Link>

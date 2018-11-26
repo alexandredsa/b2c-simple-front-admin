@@ -6,6 +6,8 @@ import PrivateRouteContainer from './components/PrivateRouteContainer';
 
 import Login from './login/Page';
 import Student from './student/Page';
+import User from './users/Page';
+
 import NotFoundContainer from './components/NotFoundContainer';
 
 const history = createHistory({ basename: '/admin' })
@@ -22,6 +24,7 @@ class Routes extends Component {
                 )} />
                 <Route path="/login" component={Login} />
                 <PrivateRouteContainer path="/alunos" component={Student} />
+                <PrivateRouteContainer path="/usuarios" component={User} />
                 <Route component={NotFoundContainer} />
             </Switch>
         </ConnectedRouter>

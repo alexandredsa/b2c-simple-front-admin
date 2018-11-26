@@ -36,5 +36,5 @@ export const clear = () => {
 
 // Reducers Interactions
 // Constants
-export const LOAD = 'LOAD';
+export const LOAD = 'LOAD_STUDENTS';
 export const CLEAR = 'CLEAR';
