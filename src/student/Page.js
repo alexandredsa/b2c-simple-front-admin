@@ -71,6 +71,7 @@ class Student extends Component {
                             <tr>
                                 <th>Nome</th>
                                 <th>E-mail</th>
+                                <th>Telefone</th>
                                 <th>Próximo de:</th>
                             </tr>
                         </thead>
@@ -80,6 +81,7 @@ class Student extends Component {
                                     <tr key={student._id}>
                                         <td>{student.name}</td>
                                         <td>{student.email}</td>
+                                        <td>{student.phone}</td>
                                         <td>{student.liveNear}</td>
                                     </tr>
                                 )
