@@ -1,17 +1,29 @@
 // Services
-import {
-    getStudents
-} from './Services';
+import * as services from './Services';
 
 
 // Actions
-export const load = () => {
+export const load = (registeredBy) => {
     return (dispatch, state) => {
         const token = state().loginStore.auth.token
         return new Promise((resolve, reject) => {
-            getStudents(token)
+            services.getStudents(token, registeredBy)
                 .then(response => {
                     dispatch(store(response))
+                    resolve(response)
+                }).catch(error => {
+                    reject(error)
+                })
+        })
+    }
+}
+
+export const exportCsv = (registeredBy) => {
+    return (dispatch, state) => {
+        const token = state().loginStore.auth.token
+        return new Promise((resolve, reject) => {
+            services.exportCsv(token, registeredBy)
+                .then(response => {
                     resolve(response)
                 }).catch(error => {
                     reject(error)

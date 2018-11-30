@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const getStudents = (token) => {
+export const getStudents = (token, registeredBy) => {
     return new Promise((resolve, reject) => {
         const config = {
             headers: {
@@ -8,7 +8,23 @@ export const getStudents = (token) => {
             }
         };
 
-        axios.get(API_URL + '/students', config)
+        axios.get(API_URL + `/students?registeredBy=${registeredBy}`, config)
+            .then((response) => resolve(response.data))
+            .catch((error) => {
+                reject(error)
+            })
+    })
+}
+
+export const exportCsv = (token, registeredBy) => {
+    return new Promise((resolve, reject) => {
+        const config = {
+            headers: {
+                "app-token": token
+            }
+        };
+
+        axios.get(API_URL + `/students/csv?registeredBy=${registeredBy}`, config)
             .then((response) => resolve(response.data))
             .catch((error) => {
                 reject(error)

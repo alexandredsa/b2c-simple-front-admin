@@ -1,12 +1,18 @@
 import React, { Component } from "react";
-import { Table, Navbar } from "react-bootstrap";
+import Select from 'react-select';
+import { Table, Navbar, Button } from "react-bootstrap";
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { load, clear } from './Actions';
+import { load, clear, exportCsv } from './Actions';
+import { list } from '../users/Actions';
+import fileDownload from "js-file-download";
+
 
 const mapDispatchToProps = dispatch => {
     return {
-        load: () => dispatch(load()),
+        load: (registeredBy) => dispatch(load(registeredBy)),
+        exportCsv: (registeredBy) => dispatch(exportCsv(registeredBy)),
+        listUsers: () => dispatch(list()),
         clear: () => dispatch(clear())
     }
 }
@@ -14,7 +20,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return {
         students: state.studentStore.students,
-        username: state.loginStore.auth.user
+        username: state.loginStore.auth.user,
+        users: state.userStore.users
     }
 }
 
@@ -24,11 +31,30 @@ class Student extends Component {
         super(props);
 
         this.state = {
+            selectedOption: null,
         };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.exportCsv = this.exportCsv.bind(this);
     }
+
+    handleChange(selectedOption) {
+        this.props.load(selectedOption.value)
+        this.setState({ selectedOption });
+    }
+
+    exportCsv() {
+        const { selectedOption } = this.state;
+        this.props.exportCsv(selectedOption ? selectedOption.value : null)
+        .then(data => {
+            fileDownload(data, `${Date.now()}.csv`);
+        })
+    }
+
 
     componentDidMount() {
         this.props.load();
+        this.props.listUsers();
     }
 
     logout() {
@@ -42,6 +68,14 @@ class Student extends Component {
     }
 
     render() {
+        const options = this.props.users.map(user => {
+            return { value: user.login, label: user.login };
+        });
+
+        options.unshift({ value: this.props.username, label: this.props.username });
+
+        const { selectedOption } = this.state;
+
         return (
             <div>
                 <Navbar inverse>
@@ -63,9 +97,18 @@ class Student extends Component {
                         </Navbar.Text>
                     </Navbar.Collapse>
                 </Navbar>;
-
                 <div style={{ backgroundColor: "#fff", margin: 80, padding: 10 }}>
                     <center><h2>Alunos</h2></center>
+                    <div style={{ width: "25%", marginBottom: 8, float: "right" }}>
+                        <Select
+                            value={selectedOption}
+                            placeholder="Selecione um Usuário"
+                            isSearchable={true}
+                            onChange={this.handleChange}
+                            options={options}
+                        />
+                    </div>
+                    <Button bsStyle="success" onClick={this.exportCsv} download>Exportar</Button>
                     <Table striped bordered condensed hover>
                         <thead>
                             <tr>
@@ -73,6 +116,7 @@ class Student extends Component {
                                 <th>E-mail</th>
                                 <th>Telefone</th>
                                 <th>Próximo de:</th>
+                                <th>Cadastrado Por:</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -83,6 +127,7 @@ class Student extends Component {
                                         <td>{student.email}</td>
                                         <td>{student.phone}</td>
                                         <td>{student.liveNear}</td>
+                                        <td>{student.registeredBy}</td>
                                     </tr>
                                 )
                             })}
