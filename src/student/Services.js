@@ -24,7 +24,7 @@ export const exportCsv = (token, registeredBy) => {
             }
         };
 
-        axios.get(API_URL + `/students/csv?registeredBy=${registeredBy}`, config)
+        axios.get(API_URL + `/xls/relatorio.xlsx?registeredBy=${registeredBy}`, config)
             .then((response) => resolve(response.data))
             .catch((error) => {
                 reject(error)

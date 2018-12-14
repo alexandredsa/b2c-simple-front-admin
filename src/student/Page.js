@@ -46,9 +46,6 @@ class Student extends Component {
     exportCsv() {
         const { selectedOption } = this.state;
         this.props.exportCsv(selectedOption ? selectedOption.value : null)
-        .then(data => {
-            fileDownload(data, `${Date.now()}.csv`);
-        })
     }
 
 
