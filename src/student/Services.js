@@ -18,16 +18,8 @@ export const getStudents = (token, registeredBy) => {
 
 export const exportCsv = (token, registeredBy) => {
     return new Promise((resolve, reject) => {
-        const config = {
-            headers: {
-                "app-token": token
-            }
-        };
-
-        axios.get(API_URL + `/xls/relatorio.xlsx?registeredBy=${registeredBy}`, config)
-            .then((response) => resolve(response.data))
-            .catch((error) => {
-                reject(error)
-            })
+        const url = API_URL + `/xls/relatorio.xlsx?registeredBy=${registeredBy}&app-token=${token}`
+        window.open(url, '_blank');
+        resolve();
     })
 }

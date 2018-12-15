@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { load, clear, exportCsv } from './Actions';
 import { list } from '../users/Actions';
-import fileDownload from "js-file-download";
 
 
 const mapDispatchToProps = dispatch => {
@@ -46,7 +45,6 @@ class Student extends Component {
     exportCsv() {
         const { selectedOption } = this.state;
         this.props.exportCsv(selectedOption ? selectedOption.value : null)
-        .then(data => fileDownload(data, `${Date.now()}.xlsx`))
     }
 
 
